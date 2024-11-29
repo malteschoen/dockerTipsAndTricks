@@ -1,18 +1,32 @@
-### workflow instruction ###
+### what is docker? ###
+We are using Docker as a rather hamfisted replacement for other virtualisation softwares (like virtualbox, proxxmoxx, etc.)
 
-1. if host system is windows, install WSL (Linux-on-Windows subsystem)
-2. install docker (z.B. <https://docs.docker.com/engine/install/ubuntu>)
-3. docker pull rvelseg/rheotool:of70_0.1
-4. docker run -dit --rm -v "/home/schoen/rheoToolSharedFolder/:/app" "rvelseg/rheotool:of70_0.1" for a linux host
+Docker can be installed on many types of host systems but reproduces the exact same guest behaviour anywhere.
+
+We can exploit virtualisation to have many different versions of OpenFOAM installed on the same computer, e.g. both OF11 and OF2304.
+
+There are three important terms to consider:
+* "host" - that is the computer/system on which docker is installed
+* "guest container" - that is the instance of the virtual computer, usually running some version of OpenFOAM
+* "image" - we might wish to have multiple containers with the same basic configuration (e.g. OF11). To save space, the basic configuration is stored in an image. Upon guest container start-up, a 'carbon copy' of the image is made and used for the new container.
+
+### workflow instruction for the example of a docker containing rheoTool ###
+
+1. if host system is Windows, install WSL (Linux-on-Windows subsystem)
+2. install docker (see <https://docs.docker.com/engine/install/>)
+3. For a linux host:
+   * docker run -dit --rm -v "/home/schoen/rheoToolSharedFolder/:/app" "rvelseg/rheotool:of70_0.1" 
    * \-dit means "detached with interactive terminal"
    * \--rm means "docker container will remove itself once we exit out"
    * \-v is responsible for the shared folder between host and docker container. Two parameters are given, one before the ':', one after it.
      * in our example, the folder on the host is /home/schoen/rheoToolSharedFolder
-     * in our example, the folder on the host is /app
-   * For a windows host, the command would
+     * in our example, the folder on the guest is /app
+   * "rvelseg/rheotool:of70_0.1" is the name of the author and the name of the image 
+   * before entering the docker container, use "sudo chmod 777 -R /home/schoen/rheoToolSharedFolder" to fix any problems with access/write/delete permissions
+4. For a windows host, the command would be
      * docker run -dit --rm -v "C:/Users/schoen/rheoToolSharedFolder/:/app" "rvelseg/rheotool:of70_0.1"
 5. docker ps -a
-   * shows all currently running 
+   * shows all currently running containers
 6. docker attach [hier name der butze eintragen]
 7. once inside the docker container
    * cd /app
@@ -51,18 +65,15 @@
  
 |  |  |
 |--|--|
-| docker ps | shows running container |
 | docker ps -a | shows containers that ran recently |
 | docker attach [name] | ssh into named docker (that must have been started detached) |
-| `docker container prune` | removes all stopped containers |
+| docker container prune | removes all stopped containers |
 | docker stop/start/remove foo | container foo stoppen/starten/removen |
 | docker images | shows installed images |
 | docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_ID] | find container ip |
 | docker image rm foo | image namens "foo" entfernen |
 | sudo docker commit [CONTAINER_ID] [new_image_name] | commit changes |
-| ctrl + p + q | detach session |
-| `docker run --rm -it -v "$(pwd):/downloads:rw" ghcr.io/jauderho/yt-dlp:latest` -x --audio-format opus https://www.youtube.com/watch?v=dQw4w9WgXcQ | passes "-x"  and "--audio-format opus" parameters, downloads to current directory |
+| ctrl + p + q while inside the container | detach session |
+| "docker run --rm -it -v "$(pwd):/downloads:rw" ghcr.io/jauderho/yt-dlp:latest" -x --audio-format opus https://www.youtube.com/watch?v=dQw4w9WgXcQ | passes "-x"  and "--audio-format opus" parameters, downloads opus file extracted from youtube video to current directory |
 
-```
 
-```
