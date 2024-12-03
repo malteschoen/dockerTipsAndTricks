@@ -61,6 +61,10 @@ There are three important terms to consider:
 * rheoTool under OF7 based on Ubuntu 18.04 by rvelseg
 	* docker run -it --volume="$(pwd):/app" "rvelseg/rheotool:of70_0.1"
 
+### drop-in replacement podman
+
+podman pull docker.io/bgschaid/openfoam_by_ansible:ubuntu2204_with_fe50
+
 ### Cheat sheet of commands
  
 |  |  |
