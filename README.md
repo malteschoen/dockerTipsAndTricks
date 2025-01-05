@@ -65,6 +65,8 @@ There are three important terms to consider:
 
 podman pull docker.io/bgschaid/openfoam_by_ansible:ubuntu2204_with_fe50
 
+make sure to replace the 65536 in /etc/subgid and /etc/subuid with 200000
+
 ### Cheat sheet of commands
  
 |  |  |
