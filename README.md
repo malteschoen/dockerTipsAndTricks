@@ -72,7 +72,8 @@ make sure to replace the 65536 in /etc/subgid and /etc/subuid with 200000
 |  |  |
 |--|--|
 | docker ps -a | shows containers that ran recently |
-| docker attach [name] | ssh into named docker (that must have been started detached) |
+| docker attach [name] | ssh into named container (that must have been started detached) |
+| docker attach --latest | ssh into the container last launched |
 | docker container prune | removes all stopped containers |
 | docker stop/start/remove foo | container foo stoppen/starten/removen |
 | docker images | shows installed images |
