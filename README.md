@@ -15,22 +15,23 @@ There are three important terms to consider:
 1. if host system is Windows, install WSL (Linux-on-Windows subsystem)
 2. install docker (see <https://docs.docker.com/engine/install/>)
 3. For a linux host:
-   * docker run -dit --rm -v "/home/schoen/rheoToolSharedFolder/:/app" "rvelseg/rheotool:of70_0.1" 
+   * docker run -dit --rm -v "/home/schoen/rheoToolSharedFolder/:/app" "guiguitcho/openfoam9-rheotool"
    * \-dit means "detached with interactive terminal"
    * \--rm means "docker container will remove itself once we exit out"
    * \-v is responsible for the shared folder between host and docker container. Two parameters are given, one before the ':', one after it.
      * in our example, the folder on the host is /home/schoen/rheoToolSharedFolder
      * in our example, the folder on the guest is /app
-   * "rvelseg/rheotool:of70_0.1" is the name of the author and the name of the image 
+   * "guiguitcho/openfoam9-rheotool" is the name of the author and the name of the image 
    * before entering the docker container, use "sudo chmod 777 -R /home/schoen/rheoToolSharedFolder" to fix any problems with access/write/delete permissions
 4. For a windows host, the command would be
-     * docker run -dit --rm -v "C:/Users/schoen/rheoToolSharedFolder/:/app" "rvelseg/rheotool:of70_0.1"
+     * docker run -dit --rm -v "C:/Users/schoen/rheoToolSharedFolder/:/app" "guiguitcho/openfoam9-rheotool"
 5. docker ps -a
    * shows all currently running containers
-6. docker attach [hier name der butze eintragen]
-7. once inside the docker container
+6. docker attach --latest
+   * attaches your session to the most recently started container 
+8. once inside the docker container
    * cd /app
-8. check whether stuff actually works
+9. check whether stuff actually works
    * rheoFoam
   
 ### Incomplete list of pre-made docker containers ###
@@ -61,7 +62,7 @@ There are three important terms to consider:
 * ~~rheoTool under OF7 based on Ubuntu 18.04 by rvelseg (no longer recommended since it lacks features from rheoTool 5.0 such as the film casting solver)~~
 	* ~~docker run -it --volume="$(pwd):/app" "rvelseg/rheotool:of70_0.1"~~
  * rheoTool under OF9 based on Ubuntu 20.04 by guiguitcho
-	* docker run -it --volume="$(pwd):/app" "guiguitcho//openfoam9-rheotool"
+	* docker run -it --volume="$(pwd):/app" "guiguitcho/openfoam9-rheotool"
 
 ### drop-in replacement podman
 
