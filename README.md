@@ -58,8 +58,10 @@ There are three important terms to consider:
 	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2306"
 	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2312"
 	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2406"
-* rheoTool under OF7 based on Ubuntu 18.04 by rvelseg
-	* docker run -it --volume="$(pwd):/app" "rvelseg/rheotool:of70_0.1"
+* ~~rheoTool under OF7 based on Ubuntu 18.04 by rvelseg (no longer recommended since it lacks features from rheoTool 5.0 such as the film casting solver)~~
+	* ~~docker run -it --volume="$(pwd):/app" "rvelseg/rheotool:of70_0.1"~~
+ * rheoTool under OF9 based on Ubuntu 20.04 by guiguitcho
+	* docker run -it --volume="$(pwd):/app" "guiguitcho//openfoam9-rheotool"
 
 ### drop-in replacement podman
 
