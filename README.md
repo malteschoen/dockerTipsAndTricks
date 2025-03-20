@@ -36,34 +36,43 @@ There are three important terms to consider:
   
 ### Incomplete list of pre-made docker containers ###
 
-* FoamExtend5.0 based on Ubuntu 22.04 by bgschaid
-	* docker run -it --volume="$(pwd):/foamdata"   "bgschaid/openfoam_by_ansible:ubuntu2204_with_fe50"
-* Solids4Foam based on Ubuntu 18.04
-	* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-foam-extend-4.1"
-	* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-openfoam-v2012"
-	* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-openfoam-9"
-* OpenFOAM versions 4 through 11 provided by OpenFOAM Foundation Ltd., London, United Kingdom - based on various Ubuntu versions
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam4-paraview50"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam5-paraview54"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam6-paraview54"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam7-paraview56"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam9-paraview56"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam10-paraview56"
-	* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam11-paraview510"	
-* OpenFOAM versions 20.12 through 24.06 provided by OpenCFD Ltd. and thus by ESI Group, Bagneux, France - based on various Ubuntu versions
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2012"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2106"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2112"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2206"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2212"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2306"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2312"
-	* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2406"
+#### FoamExtend 5.0 based on Ubuntu 22.04 ####
+* docker run -it --volume="$(pwd):/foamdata"   "bgschaid/openfoam_by_ansible:ubuntu2204_with_fe50"
+
+#### Solids4Foam version 2.0 based on Ubuntu 18.04 ####
+* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-foam-extend-4.1"
+* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-openfoam-v2012"
+* docker run -it --volume="$(pwd):/shared"  "solids4foam/solids4foam-v2.0-openfoam-9"
+ 
+####  OpenFOAM versions 4 through 11 provided by OpenFOAM Foundation Ltd., London, United Kingdom - based on various Ubuntu versions ####
+
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam4-paraview50"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam5-paraview54"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam6-paraview54"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam7-paraview56"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam9-paraview56"
+* docke run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam10-paraview56"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam11-paraview510"
+  
+####  OpenFOAM versions 20.12 through 24.06 provided by OpenCFD Ltd. and thus by ESI Group, Bagneux, France - based on various Ubuntu versions #### 
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2012"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2106"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2112"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2206"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2212"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2306"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2312"
+* docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2406"
+
+#### rheotool by Mr. Pimenta ####
 * ~~rheoTool under OF7 based on Ubuntu 18.04 by rvelseg (no longer recommended since it lacks features from rheoTool 5.0 such as the film casting solver)~~
 	* ~~docker run -it --volume="$(pwd):/app" "rvelseg/rheotool:of70_0.1"~~
- * rheoTool under OF9 based on Ubuntu 20.04 by guiguitcho
+* rheoTool under OF9 based on Ubuntu 20.04 by guiguitcho
 	* docker run -it --volume="$(pwd):/app" "guiguitcho/openfoam9-rheotool"
 
+#### GOMA libraries (you still have to download and compile goma) ####
+* docker run -it --volume="$(pwd):/app"  "westonortiz/goma-libs"
+ 
 ### drop-in replacement podman
 
 podman pull docker.io/bgschaid/openfoam_by_ansible:ubuntu2204_with_fe50
@@ -78,12 +87,12 @@ make sure to replace the 65536 in /etc/subgid and /etc/subuid with 200000
 | docker attach [name] | ssh into named container (that must have been started detached) |
 | docker attach --latest | ssh into the container last launched |
 | docker container prune | removes all stopped containers |
-| docker stop/start/remove foo | container foo stoppen/starten/removen |
+| docker stop/start/remove foo | container named "foo" is stopped/started/removed |
 | docker images | shows installed images |
 | docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_ID] | find container ip |
-| docker image rm foo | image namens "foo" entfernen |
-| sudo docker commit [CONTAINER_ID] [new_image_name] | commit changes |
-| ctrl + p + q while inside the container | detach session |
+| docker image rm foo | image named "foo" is removed from your hard-drive |
+| sudo docker commit [CONTAINER_ID] [new_image_name] | commit changes made during your session to an image, creating a new image in the process |
+| ctrl + p + q while inside the container | detach session - leaves container running in the background and returns you to the host linux machine |
 | "docker run --rm -it -v "$(pwd):/downloads:rw" ghcr.io/jauderho/yt-dlp:latest" -x --audio-format opus https://www.youtube.com/watch?v=dQw4w9WgXcQ | passes "-x"  and "--audio-format opus" parameters, downloads opus file extracted from youtube video to current directory |
 
 
