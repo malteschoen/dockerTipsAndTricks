@@ -51,8 +51,12 @@ There are three important terms to consider:
 * docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam6-paraview54"
 * docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam7-paraview56"
 * docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam9-paraview56"
-* docke run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam10-paraview56"
+* docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam10-paraview56"
 * docker run -it --volume="$(pwd):/home/openfoam" "openfoam/openfoam11-paraview510"
+
+#### OpenFOAM version 12 provided by OpenFOAM Foundation Ltd., London, United Kingdom supplied through https://github.com/gerlero/docker-openfoam and https://hub.docker.com/u/microfluidica ####
+
+* docker run -it --volume="$(pwd):/home/openfoam" "microfluidica/openfoam:org"
   
 ####  OpenFOAM versions 20.12 through 24.06 provided by OpenCFD Ltd. and thus by ESI Group, Bagneux, France - based on various Ubuntu versions #### 
 * docker run -it --volume="$(pwd):/home/openfoam" "opencfd/openfoam-run:2012"
